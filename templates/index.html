@@ -1,0 +1,36 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Prediksi Polusi DKI Jakarta</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <h1>Prediksi Polusi Udara DKI Jakarta</h1>
+
+    <form id="predictionForm">
+        <input type="number" id="jumlah_penduduk" placeholder="Jumlah Penduduk" required><br>
+        <input type="number" id="jumlah_kepadatan" placeholder="Jumlah Kepadatan" required><br>
+        <input type="number" step="0.01" id="sulfur_dioksida" placeholder="Sulfur Dioksida" required><br>
+        <input type="number" step="0.01" id="karbon_monoksida" placeholder="Karbon Monoksida" required><br>
+        <input type="number" step="0.01" id="ozon" placeholder="Ozon" required><br>
+        <input type="number" step="0.01" id="nitrogen_dioksida" placeholder="Nitrogen Dioksida" required><br>
+
+        <select id="wilayah" required>
+            <option value="">Pilih Wilayah</option>
+            <option value="0">Jakarta Barat</option>
+            <option value="1">Jakarta Pusat</option>
+            <option value="2">Jakarta Selatan</option>
+            <option value="3">Jakarta Timur</option>
+            <option value="4">Jakarta Utara</option>
+        </select><br><br>
+
+        <button type="submit">Prediksi</button>
+    </form>
+
+    <h2 id="hasilPrediksi"></h2>
+
+    <script src="/static/script.js"></script>
+</body>
+</html>
