@@ -50,17 +50,8 @@ def home():
 @app.route('/predict', methods=['POST'])
 def predict():
     data = request.get_json()
-    features = [
-        float(data['jumlah_penduduk']),
-        float(data['jumlah_kepadatan']),
-        float(data['sulfur_dioksida']),
-        float(data['karbon_monoksida']),
-        float(data['ozon']),
-        float(data['nitrogen_dioksida']),
-        float(data['wilayah'])
-    ]
     
-    # Define feature names
+    # Define feature names in the correct order (same as training)
     feature_names = [
         'jumlah_penduduk',
         'jumlah_kepadatan',
@@ -68,7 +59,22 @@ def predict():
         'karbon_monoksida',
         'ozon',
         'nitrogen_dioksida',
-        'wilayah'
+        'wilayah',
+        'pm_sepuluh',
+        'pm_duakomalima'
+    ]
+    
+    # Create features in the correct order
+    features = [
+        float(data['jumlah_penduduk']),
+        float(data['jumlah_kepadatan']),
+        float(data['sulfur_dioksida']),
+        float(data['karbon_monoksida']),
+        float(data['ozon']),
+        float(data['nitrogen_dioksida']),
+        float(data['wilayah']),
+        float(data['pm_sepuluh']),
+        float(data['pm_duakomalima'])
     ]
     
     # Convert to numpy array
