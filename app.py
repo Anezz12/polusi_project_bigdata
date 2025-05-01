@@ -49,8 +49,6 @@ def get_health_description(prediction_class):
         0: "Kualitas udara baik dan tidak memiliki risiko bagi kesehatan.",
         1: "Kualitas udara sedang. Beberapa polutan mungkin menyebabkan efek kesehatan pada sejumlah kecil individu yang sangat sensitif.",
         2: "Kualitas udara tidak sehat. Anggota kelompok sensitif mungkin mengalami efek kesehatan.",
-        3: "Kualitas udara sangat tidak sehat. Dapat memicu peringatan kesehatan karena semua orang dapat mengalami efek kesehatan yang serius.",
-        4: "Kualitas udara berbahaya. Peringatan kesehatan darurat. Seluruh populasi kemungkinan akan terpengaruh."
     }
     return descriptions.get(prediction_class, "Deskripsi tidak tersedia")
 
@@ -111,8 +109,6 @@ def predict():
             0: "Baik",
             1: "Sedang",
             2: "Tidak Sehat",
-            3: "Sangat Tidak Sehat",
-            4: "Berbahaya"
         }
         
         health_status = health_status_map.get(pred_class, "Status tidak diketahui")
