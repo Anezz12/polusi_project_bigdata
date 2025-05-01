@@ -2,81 +2,102 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Prediksi Polusi DKI Jakarta</title>
     <link rel="stylesheet" href="/static/style.css" />
   </head>
   <body>
-    <h1>Prediksi Polusi Udara DKI Jakarta</h1>
+    <div class="container">
+      <header>
+        <h1>Prediksi Polusi Udara DKI Jakarta</h1>
+        <p class="subtitle">Analisis kualitas udara berdasarkan data polutan</p>
+      </header>
 
-    <form id="predictionForm">
-      <input
-        type="number"
-        id="jumlah_penduduk"
-        placeholder="Jumlah Penduduk"
-        required
-      /><br />
-      <input
-        type="number"
-        id="jumlah_kepadatan"
-        placeholder="Jumlah Kepadatan"
-        required
-      /><br />
-      <input
-        type="number"
-        step="0.01"
-        id="pm_sepuluh"
-        placeholder="pm_sepuluh"
-        required
-      /><br />
-      <input
-        type="number"
-        step="0.01"
-        id="pm_duakomalima"
-        placeholder="pm_duakomalima"
-        required
-      /><br />
-      <input
-        type="number"
-        step="0.01"
-        id="sulfur_dioksida"
-        placeholder="Sulfur Dioksida"
-        required
-      /><br />
-      <input
-        type="number"
-        step="0.01"
-        id="karbon_monoksida"
-        placeholder="Karbon Monoksida"
-        required
-      /><br />
-      <input
-        type="number"
-        step="0.01"
-        id="ozon"
-        placeholder="Ozon"
-        required
-      /><br />
-      <input
-        type="number"
-        step="0.01"
-        id="nitrogen_dioksida"
-        placeholder="Nitrogen Dioksida"
-        required
-      /><br />
+      <div class="content-wrapper">
+        <div class="form-section">
+          <h2>Masukkan Data</h2>
+          <form id="predictionForm">
+            <div class="form-group">
+              <label for="jumlah_penduduk">Jumlah Penduduk:</label>
+              <input type="number" id="jumlah_penduduk" required />
+            </div>
 
-      <select id="wilayah" required>
-        <option value="">Pilih Wilayah</option>
-        <option value="0">Jakarta Barat</option>
-        <option value="1">Jakarta Pusat</option>
-        <option value="2">Jakarta Selatan</option>
-        <option value="3">Jakarta Timur</option>
-        <option value="4">Jakarta Utara</option></select
-      ><br /><br />
+            <div class="form-group">
+              <label for="jumlah_kepadatan">Jumlah Kepadatan:</label>
+              <input type="number" id="jumlah_kepadatan" required />
+            </div>
 
-      <button type="submit">Prediksi</button>
-    </form>
+            <div class="form-group">
+              <label for="pm_sepuluh">PM10 (µg/m³):</label>
+              <input type="number" step="0.01" id="pm_sepuluh" required />
+            </div>
 
-    <h2 id="hasilPrediksi"></h2>
+            <div class="form-group">
+              <label for="pm_duakomalima">PM2.5 (µg/m³):</label>
+              <input type="number" step="0.01" id="pm_duakomalima" required />
+            </div>
+
+            <div class="form-group">
+              <label for="sulfur_dioksida"
+                >Sulfur Dioksida (SO₂) (µg/m³):</label
+              >
+              <input type="number" step="0.01" id="sulfur_dioksida" required />
+            </div>
+
+            <div class="form-group">
+              <label for="karbon_monoksida"
+                >Karbon Monoksida (CO) (µg/m³):</label
+              >
+              <input type="number" step="0.01" id="karbon_monoksida" required />
+            </div>
+
+            <div class="form-group">
+              <label for="ozon">Ozon (O₃) (µg/m³):</label>
+              <input type="number" step="0.01" id="ozon" required />
+            </div>
+
+            <div class="form-group">
+              <label for="nitrogen_dioksida"
+                >Nitrogen Dioksida (NO₂) (µg/m³):</label
+              >
+              <input
+                type="number"
+                step="0.01"
+                id="nitrogen_dioksida"
+                required
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="wilayah">Wilayah:</label>
+              <select id="wilayah" required>
+                <option value="">Pilih Wilayah</option>
+                <option value="0">Jakarta Barat</option>
+                <option value="1">Jakarta Pusat</option>
+                <option value="2">Jakarta Selatan</option>
+                <option value="3">Jakarta Timur</option>
+                <option value="4">Jakarta Utara</option>
+              </select>
+            </div>
+
+            <button type="submit" class="submit-btn">
+              Analisis Kualitas Udara
+            </button>
+          </form>
+        </div>
+
+        <div class="result-section">
+          <h2>Hasil Analisis</h2>
+          <div id="hasilPrediksi" class="prediction-result">
+            <p class="empty-state">Hasil analisis akan ditampilkan di sini</p>
+          </div>
+        </div>
+      </div>
+
+      <footer>
+        <p>© 2025 Sistem Prediksi Polusi Udara DKI Jakarta</p>
+      </footer>
+    </div>
 
     <script src="/static/script.js"></script>
   </body>

@@ -43,6 +43,17 @@ except Exception as e:
     model.fit(X_dummy, y_dummy)
     print("Using fallback RandomForest model instead.")
 
+def get_health_description(prediction_class):
+    """Return detailed description based on prediction class"""
+    descriptions = {
+        0: "Kualitas udara baik dan tidak memiliki risiko bagi kesehatan.",
+        1: "Kualitas udara sedang. Beberapa polutan mungkin menyebabkan efek kesehatan pada sejumlah kecil individu yang sangat sensitif.",
+        2: "Kualitas udara tidak sehat. Anggota kelompok sensitif mungkin mengalami efek kesehatan.",
+        3: "Kualitas udara sangat tidak sehat. Dapat memicu peringatan kesehatan karena semua orang dapat mengalami efek kesehatan yang serius.",
+        4: "Kualitas udara berbahaya. Peringatan kesehatan darurat. Seluruh populasi kemungkinan akan terpengaruh."
+    }
+    return descriptions.get(prediction_class, "Deskripsi tidak tersedia")
+
 @app.route('/')
 def home():
     return render_template('index.html')
@@ -94,11 +105,41 @@ def predict():
             # Simple model like our DummyModel
             prediction = model.predict(features_array)
             pred_class = int(prediction[0])
-            
-        return jsonify({'prediction': pred_class})
+        
+        # Map prediction to health status
+        health_status_map = {
+            0: "Baik",
+            1: "Sedang",
+            2: "Tidak Sehat",
+            3: "Sangat Tidak Sehat",
+            4: "Berbahaya"
+        }
+        
+        health_status = health_status_map.get(pred_class, "Status tidak diketahui")
+        
+        return jsonify({
+            'prediction': pred_class,
+            'health_status': health_status,
+            'description': get_health_description(pred_class)
+        })
     except Exception as e:
         print(f"Prediction error: {str(e)}")
-        return jsonify({'error': str(e), 'prediction': 1}), 200  # Return a fallback prediction
+        return jsonify({
+            'error': str(e), 
+            'prediction': 1, 
+            'health_status': 'Sedang',
+            'description': get_health_description(1)
+        }), 200  # Return a fallback prediction
+
+@app.route('/api/status', methods=['GET'])
+def status():
+    """API endpoint to check if the service is up"""
+    model_type = type(model).__name__
+    return jsonify({
+        'status': 'online',
+        'model_type': model_type,
+        'version': '1.0.0'
+    })
 
 if __name__ == '__main__':
     app.run(debug=True)
